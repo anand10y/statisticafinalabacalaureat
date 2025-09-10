@@ -7,9 +7,14 @@ st.set_page_config(layout="wide")
 
 uploaded_file = st.file_uploader("Încarcă fișierul Excel", type=["xlsx", "xls"])
 if uploaded_file:
-    df = pd.read_excel(uploaded_file)
-    df.columns = df.columns.str.strip()  # curățăm antetele
+ 
 
+       # Reading Excel
+    df = pd.read_excel("data.xlsx", engine="openpyxl")
+
+    df.columns = df.columns.str.strip()  # curățăm antetele
+    
+ 
     # coloane principale
     col_clasa = next((c for c in df.columns if "clasa" in c.lower()), None)
     col_statut = next((c for c in df.columns if "statut" in c.lower()), None)
@@ -119,3 +124,4 @@ if uploaded_file:
     # -------------------------
     st.subheader("📋 Tabelul complet (după filtrare)")
     st.dataframe(df_filtrat, use_container_width=True)
+
