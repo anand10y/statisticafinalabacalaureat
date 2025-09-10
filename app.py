@@ -3,6 +3,14 @@ import streamlit as st
 import plotly.express as px
 import numpy as np
 
+
+uploaded_file = st.file_uploader("Upload an Excel file", type=["xlsx"])
+
+if uploaded_file is not None:
+    df = pd.read_excel(uploaded_file, engine="openpyxl")
+    st.write(df)
+ 
+
 st.set_page_config(layout="wide")
 
 uploaded_file = st.file_uploader("Încarcă fișierul Excel", type=["xlsx", "xls"])
@@ -124,4 +132,5 @@ if uploaded_file:
     # -------------------------
     st.subheader("📋 Tabelul complet (după filtrare)")
     st.dataframe(df_filtrat, use_container_width=True)
+
 
